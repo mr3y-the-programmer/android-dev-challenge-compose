@@ -1,5 +1,0 @@
-rootProject.ext.versions = [
-        kotlin_version : "1.4.30",
-        compose_version : "1.0.0-beta01",
-        coroutines_version : "1.4.2"
-]

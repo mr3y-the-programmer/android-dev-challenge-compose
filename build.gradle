@@ -15,6 +15,7 @@
  */
 allprojects {
     apply(from = "gradle/versions.gradle")
+    val versions: Map<String, String> by extra
     repositories {
         google()
         jcenter()
@@ -22,12 +23,7 @@ allprojects {
 }
 
 buildscript {
-    val versions: Map<String, String> by extra
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.0.0-alpha08")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.getValue("kotlin_version")}")
-    }
+//    apply(from = "gradle/cleanup.gradle.kts")
 }
 
 plugins {
