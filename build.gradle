@@ -13,33 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-allprojects {
-    apply(from = "gradle/versions.gradle")
-    val versions: Map<String, String> by extra
+
+buildscript {
+    ext.kotlin_version = '1.4.30'
+    ext.compose_version = '1.0.0-beta01'
+    ext.coroutines_version = '1.4.2'
+    apply from: "gradle/cleanup.gradle.kts"
+
     repositories {
         google()
         jcenter()
     }
-}
 
-buildscript {
-//    apply(from = "gradle/cleanup.gradle.kts")
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha09'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
 plugins {
-    id("com.diffplug.spotless") version "5.7.0"
+    id 'com.diffplug.spotless' version '5.7.0'
 }
 
 subprojects {
-    apply(plugin = "com.diffplug.spotless")
+    repositories {
+        google()
+        jcenter()
+    }
+
+    apply plugin: 'com.diffplug.spotless'
     spotless {
         kotlin {
-            target("**/*.kt")
+            target '**/*.kt'
             targetExclude("$buildDir/**/*.kt")
-            targetExclude("bin/**/*.kt")
+            targetExclude('bin/**/*.kt')
 
             ktlint("0.40.0")
-            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+            licenseHeaderFile rootProject.file('spotless/copyright.kt')
         }
     }
 }
