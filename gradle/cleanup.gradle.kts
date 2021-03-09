@@ -28,7 +28,7 @@ tasks.register("cleanup") {
 
     //Cleanup the cleanup :)
     file("build.gradle").replace(
-        "apply(from = \"gradle/cleanup.gradle.kts\")",
+        "apply from: \"gradle/cleanup.gradle.kts\"",
         " "
     )
     file("gradle/cleanup.gradle.kts").delete() //self-delete
